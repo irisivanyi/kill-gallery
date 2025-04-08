@@ -5,8 +5,11 @@
 }
 
 body {
-    background-color: black;
-    overflow: hidden;
+    background-color: #A17EE1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
@@ -15,9 +18,8 @@ body {
     position: relative;
 }
 
-#bouncing-logo {
-    position: absolute;
-    will-change: transform;
-    width: 200px;
-    height: 200px;
+#logo {
+    width: 100vw;
+    height: auto;
+    max-height: 100vh;
 } 
