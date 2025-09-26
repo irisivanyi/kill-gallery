@@ -6,10 +6,57 @@
     <title>Kill Gallery</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="styles.css">
-      <a href="mailto:thomas.mouna@hotmail.com">
+    <a href="mailto:thomas.mouna@hotmail.com">
         <img id="logo" src="logo.svg" alt="Logo">
     </a>
 </head>
 <body>
+
+    <!-- START: Email capture form -->
+    <section id="subscribe" class="newsletter">
+      <h2>Join our list</h2>
+      <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+        <input type="hidden" name="source" value="killgallery.com">
+        <!-- honeypot anti-spam field -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
+        <button type="submit">Subscribe</button>
+        <p id="form-msg" role="status" style="margin-top:8px;"></p>
+      </form>
+      <small>By subscribing you agree to receive emails from Kill Gallery. You can unsubscribe at any time.</small>
+    </section>
+    <!-- END: Email capture form -->
+
+    <script>
+    (function () {
+      const form = document.getElementById('newsletter-form');
+      const msg  = document.getElementById('form-msg');
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msg.textContent = 'Submitting...';
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+          });
+          if (res.ok) {
+            msg.textContent = 'Thanks — please check your inbox.';
+            form.reset();
+          } else {
+            let text = 'Sorry, something went wrong. Try again.';
+            try {
+              const data = await res.json();
+              if (data && (data.message || data.error)) text = data.message || data.error;
+            } catch(_) {}
+            msg.textContent = text;
+          }
+        } catch (err) {
+          msg.textContent = 'Network error. Please try again.';
+        }
+      });
+    })();
+    </script>
+
 </body>
 </html>
