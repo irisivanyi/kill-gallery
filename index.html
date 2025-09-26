@@ -7,69 +7,66 @@
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
-    /* Page basics */
     html, body {
       margin: 0;
       padding: 0;
-      background: #A17EE1; /* same as your SVG background */
+      background: #A17EE1; /* same colour as SVG background */
       font-family: system-ui, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Large SVG artwork */
+    /* Larger SVG artwork, and push everything lower */
     .hero {
-      width: min(90vw, 800px); /* keep it big and responsive */
+      width: min(95vw, 1000px);  /* increase max width */
       height: auto;
-      margin-top: 40px;
+      margin-top: 150px;        /* pushes image + form further down */
     }
 
-    /* Email form: small and centred under image */
-/* Email form: smaller and centred under image */
-.newsletter {
-  margin-top: 30px;
-  text-align: center;
-  background: rgba(255,255,255,0.2);
-  padding: 12px 14px;          /* slightly tighter padding */
-  border-radius: 12px;
-  width: 130px;                /* half the previous 260px */
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
+    /* Very small email form beneath image */
+    .newsletter {
+      margin-top: 40px;
+      text-align: center;
+      background: rgba(255,255,255,0.2);
+      padding: 10px;
+      border-radius: 12px;
+      width: 90px;              /* << form width set to 90px */
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
 
-.newsletter input[type="email"] {
-  width: 100%;
-  padding: 6px;
-  font-size: 12px;
-  border: 1px solid rgba(0,0,0,0.4);
-  border-radius: 6px;
-  outline: none;
-}
+    .newsletter input[type="email"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 11px;
+      border: 1px solid rgba(0,0,0,0.4);
+      border-radius: 5px;
+      outline: none;
+    }
 
-.newsletter button {
-  width: 100%;
-  margin-top: 6px;
-  padding: 6px;
-  border: none;
-  border-radius: 6px;
-  background: #4b0082;
-  color: white;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
+    .newsletter button {
+      width: 100%;
+      margin-top: 6px;
+      padding: 6px;
+      border: none;
+      border-radius: 5px;
+      background: #4b0082;
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-.newsletter button:hover {
-  background: #6a0dad;
-}
+    .newsletter button:hover {
+      background: #6a0dad;
+    }
 
-#form-msg {
-  margin-top: 6px;
-  font-size: 11px;
-  min-height: 1em;
-  color: #222;
-}
-
+    #form-msg {
+      margin-top: 5px;
+      font-size: 10px;
+      min-height: 1em;
+      color: #222;
+    }
   </style>
 </head>
 <body>
@@ -88,7 +85,7 @@
     <path d="M465 368L488 326.5L458 301.5H403V318H441V332H403L442.5 360.5L465 368Z" fill="#822E77"/>
   </svg>
 
-  <!-- Small email form below image -->
+  <!-- Tiny email form below the larger image -->
   <section id="subscribe" class="newsletter">
     <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
       <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
