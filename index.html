@@ -6,87 +6,104 @@
   <title>Kill Gallery</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <!-- Optional font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
-    :root { --y: 80vh; }               /* vertical position (tweak this value) */
-
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #a58be0;             /* your purple bg; replace if you use an image */
+    :root {
+      --bg: #A17EE1;       /* page background */
+      --card: rgba(255,255,255,0.18);
+      --btn: #4b0082;
+      --maxW: 760px;       /* max width of the artwork */
+      --cardW: 420px;      /* max width of the form card */
     }
 
-    /* Position the form box */
- .newsletter {
-  position: fixed;
-  left: 30%;              /* horizontal position */
-  top: 80vh;              /* vertical position */
-  transform: translate(0, -50%);  /* vertical centring only */
-  text-align: center;
-  max-width: 420px;
-  width: calc(100% - 32px);
-  padding: 20px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #141414;
+    }
 
+    /* Page layout */
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 16px 80px;
+      gap: 24px;
+    }
 
+    /* Artwork container keeps aspect ratio and centers the SVG */
+    .art {
+      width: min(70vw, var(--maxW));    /* change 70vw to make it smaller/larger */
+      max-width: var(--maxW);
+    }
+    .art svg { width: 100%; height: auto; display: block; }
+
+    /* Email form card under the image */
+    .newsletter {
+      width: min(92vw, var(--cardW));
+      text-align: center;
+      padding: 20px;
+      background: var(--card);
+      backdrop-filter: blur(2px);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
     .newsletter input[type="email"] {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid rgba(0,0,0,0.4);
-      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.35);
+      border-radius: 8px;
       outline: none;
     }
-
     .newsletter button {
       width: 100%;
       margin-top: 10px;
       padding: 12px 16px;
       border: 0;
-      border-radius: 6px;
-      background: #4b0082;
+      border-radius: 8px;
+      background: var(--btn);
       color: #fff;
       font-weight: 600;
       cursor: pointer;
     }
-
     .newsletter button:hover { filter: brightness(1.1); }
-
     #form-msg { margin-top: 8px; min-height: 1em; }
-
-    /* Put the mail link/logo somewhere fixed so it never nudges the form */
-    .logo-link {
-      position: fixed;
-      left: 10px;
-      bottom: 10px;
-      display: inline-block;
-    }
-    #logo { height: 28px; }
   </style>
 </head>
 <body>
+  <main class="wrap">
 
-  <!-- Safe: logo moved out of <head> -->
-  <a class="logo-link" href="mailto:thomas.mouna@hotmail.com" aria-label="Email Kill Gallery">
-    <img id="logo" src="logo.svg" alt="Logo">
-  </a>
+    <!-- Artwork (inline SVG, responsive and centered) -->
+    <div class="art">
+      <svg viewBox="0 0 802 490" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kill Gallery artwork">
+        <rect width="802" height="490" fill="#A17EE1"/>
+        <path d="M364.4 128.1L440.957 260.7H287.843L364.4 128.1Z" fill="#822E77"/>
+        <path d="M454.622 155L515.868 261.08H393.377L454.622 155Z" fill="#822E77"/>
+        <circle cx="454.902" cy="98" r="32" fill="#822E77"/>
+        <path d="M187.5 416.5H70.5L70 249.5L112.5 203.5L166 224L204.5 257.5L244 349L298 333L319 376.5L230 416.5H211L130 288L125 326L187.5 416.5Z" fill="#822E77"/>
+        <path d="M240 162.5L221 163.5C221 203.5 200 213 181 207L139 192.5C126 186.5 99 174.6 99 129C99 83.4 140.333 70.3333 161 69.5C225 69.5 237 148 240 162.5Z" fill="#822E77"/>
+        <path d="M337 368L314 326.5L344 301.5H399V318H361V332H399L359.5 360.5L337 368Z" fill="#822E77"/>
+        <path d="M614.5 416.5H731.5L732 249.5L689.5 203.5L636 224L597.5 257.5L558 349L504 333L483 376.5L572 416.5H591L672 288L677 326L614.5 416.5Z" fill="#822E77"/>
+        <path d="M562 162.5L581 163.5C581 203.5 602 213 621 207L663 192.5C676 186.5 703 174.6 703 129C703 83.4 661.667 70.3333 641 69.5C577 69.5 565 148 562 162.5Z" fill="#822E77"/>
+        <path d="M465 368L488 326.5L458 301.5H403V318H441V332H403L442.5 360.5L465 368Z" fill="#822E77"/>
+      </svg>
+    </div>
 
-  <!-- Form box (no heading, no consent text) -->
-  <section id="subscribe" class="newsletter">
-    <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
-      <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
-      <input type="hidden" name="source" value="killgallery.com">
-      <!-- honeypot -->
-      <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
-      <button type="submit">Subscribe</button>
-      <p id="form-msg" role="status"></p>
-    </form>
-  </section>
+    <!-- Email form under the image -->
+    <section id="subscribe" class="newsletter">
+      <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+        <input type="hidden" name="source" value="killgallery.com">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
+        <button type="submit">Subscribe</button>
+        <p id="form-msg" role="status"></p>
+      </form>
+    </section>
+
+  </main>
 
   <script>
   (function () {
@@ -103,7 +120,7 @@
           body: new FormData(form)
         });
         if (res.ok) {
-          msg.textContent = 'Thanks — please check your inbox.';
+          msg.textContent = 'Thanks. Please check your inbox.';
           form.reset();
         } else {
           let text = 'Sorry, something went wrong. Try again.';
