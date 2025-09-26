@@ -1,106 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Kill Gallery</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: #A17EE1; /* same colour as SVG background */
-      font-family: system-ui, sans-serif;
+      background: #A17EE1;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Page wrapper */
+    .wrap {
+      min-height: 100svh;                  /* better on iOS than 100vh */
+      padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        max(24px, env(safe-area-inset-bottom));
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: center;                  /* horizontal center */
     }
 
-    /* Larger SVG artwork, and push everything lower */
+    /* Large SVG artwork */
     .hero {
-      width: min(95vw, 1000px);  /* increase max width */
+      display: block;
+      width: min(95vw, 1000px);
       height: auto;
-      margin-top: 150px;        /* pushes image + form further down */
+      margin: clamp(40px, 18svh, 160px) auto 0; /* push down & center */
     }
 
-    /* Very small email form beneath image */
+    /* Small form under image */
     .newsletter {
-      margin-top: 40px;
+      margin: 32px auto 0;                  /* center under image */
       text-align: center;
       background: rgba(255,255,255,0.2);
       padding: 10px;
       border-radius: 12px;
-      width: 90px;              /* << form width set to 90px */
+      width: 90px;                          /* requested size */
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
-
     .newsletter input[type="email"] {
-      width: 90%;
-      padding: 5px;
-      font-size: 11px;
+      width: 100%;
+      padding: 6px;
+      font-size: 12px;
       border: 1px solid rgba(0,0,0,0.4);
-      border-radius: 5px;
+      border-radius: 6px;
       outline: none;
     }
-
     .newsletter button {
       width: 100%;
       margin-top: 6px;
       padding: 6px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       background: #4b0082;
-      color: white;
-      font-size: 11px;
+      color: #fff;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
     }
+    #form-msg { margin-top: 6px; font-size: 11px; min-height: 1em; color: #222; }
 
-    .newsletter button:hover {
-      background: #6a0dad;
-    }
-
-    #form-msg {
-      margin-top: 5px;
-      font-size: 10px;
-      min-height: 1em;
-      color: #222;
+    /* Mobile-specific polish */
+    @media (max-width: 480px) {
+      /* prevent iOS zoom jumping on focus */
+      input, button { font-size: 16px; }
+      .newsletter { width: 90px; }          /* keep tiny form */
     }
   </style>
 </head>
 <body>
+  <main class="wrap">
+    <!-- Artwork -->
+    <svg class="hero" viewBox="0 0 802 490" xmlns="http://www.w3.org/2000/svg" aria-label="Kill Gallery artwork">
+      <rect width="802" height="490" fill="#A17EE1"/>
+      <path d="M364.4 128.1L440.957 260.7H287.843L364.4 128.1Z" fill="#822E77"/>
+      <path d="M454.622 155L515.868 261.08H393.377L454.622 155Z" fill="#822E77"/>
+      <circle cx="454.902" cy="98" r="32" fill="#822E77"/>
+      <path d="M187.5 416.5H70.5L70 249.5L112.5 203.5L166 224L204.5 257.5L244 349L298 333L319 376.5L230 416.5H211L130 288L125 326L187.5 416.5Z" fill="#822E77"/>
+      <path d="M240 162.5L221 163.5C221 203.5 200 213 181 207L139 192.5C126 186.5 99 174.6 99 129C99 83.4 140.333 70.3333 161 69.5C225 69.5 237 148 240 162.5Z" fill="#822E77"/>
+      <path d="M337 368L314 326.5L344 301.5H399V318H361V332H399L359.5 360.5L337 368Z" fill="#822E77"/>
+      <path d="M614.5 416.5H731.5L732 249.5L689.5 203.5L636 224L597.5 257.5L558 349L504 333L483 376.5L572 416.5H591L672 288L677 326L614.5 416.5Z" fill="#822E77"/>
+      <path d="M562 162.5L581 163.5C581 203.5 602 213 621 207L663 192.5C676 186.5 703 174.6 703 129C703 83.4 661.667 70.3333 641 69.5C577 69.5 565 148 562 162.5Z" fill="#822E77"/>
+      <path d="M465 368L488 326.5L458 301.5H403V318H441V332H403L442.5 360.5L465 368Z" fill="#822E77"/>
+    </svg>
 
-  <!-- Large artwork -->
-  <svg class="hero" viewBox="0 0 802 490" xmlns="http://www.w3.org/2000/svg">
-    <rect width="802" height="490" fill="#A17EE1"/>
-    <path d="M364.4 128.1L440.957 260.7H287.843L364.4 128.1Z" fill="#822E77"/>
-    <path d="M454.622 155L515.868 261.08H393.377L454.622 155Z" fill="#822E77"/>
-    <circle cx="454.902" cy="98" r="32" fill="#822E77"/>
-    <path d="M187.5 416.5H70.5L70 249.5L112.5 203.5L166 224L204.5 257.5L244 349L298 333L319 376.5L230 416.5H211L130 288L125 326L187.5 416.5Z" fill="#822E77"/>
-    <path d="M240 162.5L221 163.5C221 203.5 200 213 181 207L139 192.5C126 186.5 99 174.6 99 129C99 83.4 140.333 70.3333 161 69.5C225 69.5 237 148 240 162.5Z" fill="#822E77"/>
-    <path d="M337 368L314 326.5L344 301.5H399V318H361V332H399L359.5 360.5L337 368Z" fill="#822E77"/>
-    <path d="M614.5 416.5H731.5L732 249.5L689.5 203.5L636 224L597.5 257.5L558 349L504 333L483 376.5L572 416.5H591L672 288L677 326L614.5 416.5Z" fill="#822E77"/>
-    <path d="M562 162.5L581 163.5C581 203.5 602 213 621 207L663 192.5C676 186.5 703 174.6 703 129C703 83.4 661.667 70.3333 641 69.5C577 69.5 565 148 562 162.5Z" fill="#822E77"/>
-    <path d="M465 368L488 326.5L458 301.5H403V318H441V332H403L442.5 360.5L465 368Z" fill="#822E77"/>
-  </svg>
-
-  <!-- Tiny email form below the larger image -->
-  <section id="subscribe" class="newsletter">
-    <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
-      <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
-      <input type="hidden" name="source" value="killgallery.com">
-      <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
-      <button type="submit">Subscribe</button>
-      <p id="form-msg" role="status"></p>
-    </form>
-  </section>
+    <!-- Small form -->
+    <section id="subscribe" class="newsletter">
+      <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+        <input type="hidden" name="source" value="killgallery.com">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
+        <button type="submit">Subscribe</button>
+        <p id="form-msg" role="status"></p>
+      </form>
+    </section>
+  </main>
 
   <script>
     (function () {
       const form = document.getElementById('newsletter-form');
       const msg  = document.getElementById('form-msg');
-
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         msg.textContent = 'Submitting...';
@@ -110,18 +115,13 @@
             headers: { 'Accept': 'application/json' },
             body: new FormData(form)
           });
-          if (res.ok) {
-            msg.textContent = 'Thanks — please check your inbox.';
-            form.reset();
-          } else {
-            msg.textContent = 'Sorry, something went wrong. Try again.';
-          }
+          msg.textContent = res.ok ? 'Thanks — please check your inbox.' : 'Sorry, something went wrong. Try again.';
+          if (res.ok) form.reset();
         } catch {
           msg.textContent = 'Network error. Please try again.';
         }
       });
     })();
   </script>
-
 </body>
 </html>
