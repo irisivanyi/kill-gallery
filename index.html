@@ -20,20 +20,20 @@
     }
 
     /* Position the form box */
-    .newsletter {
-      position: fixed;                  /* ignores surrounding layout quirks */
-      left: 30%;
-      top: var(--y);                    /* 80% of viewport height */
-      transform: translate(-50%, -50%); /* center horizontally, pull up by half box height */
-      text-align: center;
-      max-width: 420px;
-      width: calc(100% - 32px);
-      padding: 20px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(2px);
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
+ .newsletter {
+  position: fixed;
+  left: 30%;              /* horizontal position */
+  top: 80vh;              /* vertical position */
+  transform: translate(0, -50%);  /* vertical centring only */
+  text-align: center;
+  max-width: 420px;
+  width: calc(100% - 32px);
+  padding: 20px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
 
     .newsletter input[type="email"] {
       width: 100%;
