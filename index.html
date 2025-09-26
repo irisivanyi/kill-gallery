@@ -1,81 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kill Gallery</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <a href="mailto:thomas.mouna@hotmail.com">
-        <img id="logo" src="logo.svg" alt="Logo">
-    </a>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kill Gallery</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Optional font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        background: #a58be0; /* page background */
-      }
-      .center-wrapper {
-        display: flex;
-        justify-content: center;     /* keep it horizontally centered */
-        align-items: flex-start;     /* start at top, we will push down with padding */
-        height: 100%;
-        padding-top: 80vh;           /* push down ~80% of viewport height */
-        box-sizing: border-box;
-      }
-      .newsletter {
-        text-align: center;
-        max-width: 420px;
-        padding: 20px;
-        background: rgba(255,255,255,0.1);
-        border-radius: 8px;
-      }
-      .newsletter input[type="email"] {
-        width: 80%;
-        padding: 12px;
-        margin-top: 10px;
-        border: 1px solid #333;
-        border-radius: 4px;
-      }
-      .newsletter button {
-        margin-top: 12px;
-        padding: 12px 24px;
-        background: #4b0082;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .newsletter button:hover {
-        background: #6a0dad;
-      }
-      #form-msg {
-        margin-top: 8px;
-      }
-    </style>
+  <style>
+    :root { --y: 80vh; }               /* vertical position (tweak this value) */
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #a58be0;             /* your purple bg; replace if you use an image */
+    }
+
+    /* Position the form box */
+    .newsletter {
+      position: fixed;                  /* ignores surrounding layout quirks */
+      left: 50%;
+      top: var(--y);                    /* 80% of viewport height */
+      transform: translate(-50%, -50%); /* center horizontally, pull up by half box height */
+      text-align: center;
+      max-width: 420px;
+      width: calc(100% - 32px);
+      padding: 20px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(2px);
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .newsletter input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(0,0,0,0.4);
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .newsletter button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 6px;
+      background: #4b0082;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .newsletter button:hover { filter: brightness(1.1); }
+
+    #form-msg { margin-top: 8px; min-height: 1em; }
+
+    /* Put the mail link/logo somewhere fixed so it never nudges the form */
+    .logo-link {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+      display: inline-block;
+    }
+    #logo { height: 28px; }
+  </style>
 </head>
 <body>
 
-  <div class="center-wrapper">
-    <section id="subscribe" class="newsletter">
-      <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
-        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
-        <input type="hidden" name="source" value="killgallery.com">
-        <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
-        <button type="submit">Subscribe</button>
-        <p id="form-msg" role="status"></p>
-      </form>
-    </section>
-  </div>
+  <!-- Safe: logo moved out of <head> -->
+  <a class="logo-link" href="mailto:thomas.mouna@hotmail.com" aria-label="Email Kill Gallery">
+    <img id="logo" src="logo.svg" alt="Logo">
+  </a>
+
+  <!-- Form box (no heading, no consent text) -->
+  <section id="subscribe" class="newsletter">
+    <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+      <input type="hidden" name="source" value="killgallery.com">
+      <!-- honeypot -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
+      <button type="submit">Subscribe</button>
+      <p id="form-msg" role="status"></p>
+    </form>
+  </section>
 
   <script>
   (function () {
     const form = document.getElementById('newsletter-form');
     const msg  = document.getElementById('form-msg');
+
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       msg.textContent = 'Submitting...';
@@ -96,13 +113,11 @@
           } catch(_) {}
           msg.textContent = text;
         }
-      } catch (err) {
+      } catch {
         msg.textContent = 'Network error. Please try again.';
       }
     });
   })();
   </script>
-
 </body>
 </html>
-
