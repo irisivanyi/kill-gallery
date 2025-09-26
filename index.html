@@ -9,54 +9,100 @@
     <a href="mailto:thomas.mouna@hotmail.com">
         <img id="logo" src="logo.svg" alt="Logo">
     </a>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #a58be0; /* page background */
+      }
+      .center-wrapper {
+        display: flex;
+        justify-content: center;     /* keep it horizontally centered */
+        align-items: flex-start;     /* start at top, we will push down with padding */
+        height: 100%;
+        padding-top: 80vh;           /* push down ~80% of viewport height */
+        box-sizing: border-box;
+      }
+      .newsletter {
+        text-align: center;
+        max-width: 420px;
+        padding: 20px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+      }
+      .newsletter input[type="email"] {
+        width: 80%;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid #333;
+        border-radius: 4px;
+      }
+      .newsletter button {
+        margin-top: 12px;
+        padding: 12px 24px;
+        background: #4b0082;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .newsletter button:hover {
+        background: #6a0dad;
+      }
+      #form-msg {
+        margin-top: 8px;
+      }
+    </style>
 </head>
 <body>
 
-    <!-- START: Email capture form -->
+  <div class="center-wrapper">
     <section id="subscribe" class="newsletter">
-      <h2>Join our list</h2>
       <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
         <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
         <input type="hidden" name="source" value="killgallery.com">
-        <!-- honeypot anti-spam field -->
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
         <button type="submit">Subscribe</button>
-        <p id="form-msg" role="status" style="margin-top:8px;"></p>
+        <p id="form-msg" role="status"></p>
       </form>
-      <small>By subscribing you agree to receive emails from Kill Gallery. You can unsubscribe at any time.</small>
     </section>
-    <!-- END: Email capture form -->
+  </div>
 
-    <script>
-    (function () {
-      const form = document.getElementById('newsletter-form');
-      const msg  = document.getElementById('form-msg');
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        msg.textContent = 'Submitting...';
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
-          });
-          if (res.ok) {
-            msg.textContent = 'Thanks — please check your inbox.';
-            form.reset();
-          } else {
-            let text = 'Sorry, something went wrong. Try again.';
-            try {
-              const data = await res.json();
-              if (data && (data.message || data.error)) text = data.message || data.error;
-            } catch(_) {}
-            msg.textContent = text;
-          }
-        } catch (err) {
-          msg.textContent = 'Network error. Please try again.';
+  <script>
+  (function () {
+    const form = document.getElementById('newsletter-form');
+    const msg  = document.getElementById('form-msg');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      msg.textContent = 'Submitting...';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          msg.textContent = 'Thanks — please check your inbox.';
+          form.reset();
+        } else {
+          let text = 'Sorry, something went wrong. Try again.';
+          try {
+            const data = await res.json();
+            if (data && (data.message || data.error)) text = data.message || data.error;
+          } catch(_) {}
+          msg.textContent = text;
         }
-      });
-    })();
-    </script>
+      } catch (err) {
+        msg.textContent = 'Network error. Please try again.';
+      }
+    });
+  })();
+  </script>
 
 </body>
 </html>
+
