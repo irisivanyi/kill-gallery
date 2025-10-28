@@ -34,44 +34,74 @@
       margin: clamp(40px, 18svh, 160px) auto 0; /* push down & center */
     }
 
-    /* Small form under image */
-    .newsletter {
-      margin: 32px auto 0;                  /* center under image */
-      text-align: center;
-      background: rgba(255,255,255,0.2);
-      padding: 10px;
-      border-radius: 12px;
-      width: 90px;                          /* requested size */
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .newsletter input[type="email"] {
-      width: 100%;
-      padding: 6px;
-      font-size: 12px;
-      border: 1px solid rgba(0,0,0,0.4);
-      border-radius: 6px;
-      outline: none;
-    }
-    .newsletter button {
-      width: 100%;
-      margin-top: 6px;
-      padding: 6px;
-      border: none;
-      border-radius: 6px;
-      background: #4b0082;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    #form-msg { margin-top: 6px; font-size: 11px; min-height: 1em; color: #222; }
+   /* Small form under image */
+.newsletter {
+  margin: 32px auto;                /* center under image */
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  border-radius: 16px;
+  width: min(320px, 90%);           /* responsive width, not fixed 90px */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 6px;                         /* space between input & button */
+}
 
-    /* Mobile-specific polish */
-    @media (max-width: 480px) {
-      /* prevent iOS zoom jumping on focus */
-      input, button { font-size: 16px; }
-      .newsletter { width: 90px; }          /* keep tiny form */
-    }
+/* Input field */
+.newsletter input[type="email"] {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #222;
+}
+
+/* Button */
+.newsletter button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #4b0082;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.newsletter button:hover {
+  background: #5b00a0;
+}
+
+/* Message text under form */
+#form-msg {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #222;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .newsletter {
+    flex-direction: column;
+    width: 90%;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .newsletter input,
+  .newsletter button {
+    font-size: 16px; /* prevent iOS zoom */
+    width: 100%;
+  }
+}
+
   </style>
 </head>
 <body>
