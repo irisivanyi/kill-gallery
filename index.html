@@ -34,73 +34,79 @@
       margin: clamp(40px, 18svh, 160px) auto 0; /* push down & center */
     }
 
-   /* Small form under image */
+   /* Make all widths include padding & borders (fix iOS overflow) */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Newsletter container */
 .newsletter {
-  margin: 32px auto;                /* center under image */
-  text-align: center;
+  margin: 40px auto;
   background: rgba(255, 255, 255, 0.25);
-  padding: 10px;
-  border-radius: 16px;
-  width: min(320px, 90%);           /* responsive width, not fixed 90px */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 14px;
+  border-radius: 18px;
+  width: min(560px, calc(100vw - 32px)); /* responsive width with safe margins */
   display: flex;
-  flex-direction: row;
   align-items: stretch;
   justify-content: center;
-  gap: 6px;                         /* space between input & button */
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
 }
 
-/* Input field */
+/* Email input */
 .newsletter input[type="email"] {
   flex: 1;
-  padding: 10px 12px;
-  font-size: 14px;
+  max-width: 100%;
+  padding: 12px 14px;
+  font-size: 16px; /* stops iPhone zooming */
   border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
   background: #fff;
   color: #222;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-/* Button */
+/* Subscribe button */
 .newsletter button {
-  padding: 10px 16px;
+  padding: 12px 16px;
   border: none;
-  border-radius: 8px;
-  background: #4b0082;
+  border-radius: 10px;
+  background: #4b0082; /* purple */
   color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .newsletter button:hover {
-  background: #5b00a0;
+  background: #5a00a0;
 }
 
-/* Message text under form */
+/* Optional small text under form */
 #form-msg {
-  margin-top: 8px;
-  font-size: 11px;
+  margin-top: 10px;
+  font-size: 12px;
   color: #222;
+  text-align: center;
 }
 
-/* Mobile tweaks */
-@media (max-width: 480px) {
+/* Mobile layout fix */
+@media (max-width: 520px) {
   .newsletter {
     flex-direction: column;
-    width: 90%;
-    padding: 12px;
-    gap: 8px;
+    width: calc(100vw - 32px); /* keeps form inside viewport edges */
+    padding: 16px;
+    row-gap: 10px;
   }
 
   .newsletter input,
   .newsletter button {
-    font-size: 16px; /* prevent iOS zoom */
     width: 100%;
   }
 }
+
 
   </style>
 </head>
