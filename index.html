@@ -145,7 +145,7 @@
             headers: { 'Accept': 'application/json' },
             body: new FormData(form)
           });
-          msg.textContent = res.ok ? 'Thanks — please check your inbox.' : 'Sorry, something went wrong. Try again.';
+          msg.textContent = res.ok ? 'Thanks — speak soon.' : 'Sorry, something went wrong. Try again.';
           if (res.ok) form.reset();
         } catch {
           msg.textContent = 'Network error. Please try again.';
