@@ -33,7 +33,7 @@
     /* Logo */
     .logo {
       flex-shrink: 0;
-      width: 220px;
+      width: 280px;
     }
 
     .logo svg {
@@ -54,12 +54,12 @@
 
     .tagline {
       margin: 0;
-      font-size: 1.15rem;
+      font-size: 1.35rem;
       line-height: 1.55;
       color: #2B0933;
       font-family: Georgia, 'Times New Roman', serif;
       font-weight: 400;
-      max-width: 300px;
+      max-width: 340px;
     }
 
     /* Subscribe form */
@@ -133,7 +133,7 @@
       }
 
       .logo {
-        width: 160px;
+        width: 200px;
       }
     }
   </style>
@@ -157,9 +157,11 @@
         </svg>
       </div>
 
-      <!-- Centre: text + subscribe -->
+      <!-- Centre: text + contact + subscribe -->
       <div class="centre">
         <p class="tagline">A curatorial agency focused on bringing ambitious art to life in new worlds.</p>
+
+        <p class="contact">contact: killgallery@killgallery.com</p>
 
         <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
           <input type="email" name="email" placeholder="your email" required aria-label="Email">
@@ -168,8 +170,6 @@
           <button type="submit">Subscribe</button>
           <p id="form-msg" role="status"></p>
         </form>
-
-        <p class="contact">contact: killgallery@killgallery.com</p>
       </div>
 
     </div>
