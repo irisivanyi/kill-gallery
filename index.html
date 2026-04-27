@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kill Gallery</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
     html, body {
       margin: 0;
       padding: 0;
@@ -14,144 +14,186 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    /* Page wrapper */
     .wrap {
-      min-height: 100svh;                  /* better on iOS than 100vh */
-      padding:
-        max(16px, env(safe-area-inset-top))
-        16px
-        max(24px, env(safe-area-inset-bottom));
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+    }
+
+    .inner {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      max-width: 860px;
+      width: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      flex-shrink: 0;
+      width: 220px;
+    }
+
+    .logo svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Centre column */
+    .centre {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;                  /* horizontal center */
+      align-items: center;
+      text-align: center;
+      gap: 36px;
     }
 
-    /* Large SVG artwork */
-    .hero {
-      display: block;
-      width: min(95vw, 1000px);
-      height: auto;
-      margin: clamp(40px, 18svh, 160px) auto 0; /* push down & center */
+    .tagline {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.55;
+      color: #2B0933;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 400;
+      max-width: 300px;
     }
 
-   /* Make all widths include padding & borders (fix iOS overflow) */
-*, *::before, *::after { box-sizing: border-box; }
+    /* Subscribe form */
+    #newsletter-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 240px;
+    }
 
-/* Mini Newsletter container (balanced spacing) */
-.newsletter {
-  margin: 24px auto;
-  background: rgba(255, 255, 255, 0.25);
-  padding: 10px 8px;                /* slightly more internal breathing room */
-  border-radius: 10px;
-  width: 160px;
-  max-width: 85vw;
-  display: grid;                    /* stack input + button vertically */
-  row-gap: 10px;                    /* even gap between input & button */
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(4px);
-}
+    #newsletter-form input[type="email"] {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 0;
+      padding: 8px 0;
+      font-size: 0.8rem;
+      color: white;
+      width: 100%;
+      outline: none;
+      text-align: center;
+      letter-spacing: 0.04em;
+      font-family: inherit;
+    }
 
-/* Email input */
-.newsletter input[type="email"] {
-  width: 100%;
-  height: 28px;
-  padding: 4px 8px;
-  font-size: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 6px;
-  outline: none;
-  background: #fff;
-  color: #222;
-  -webkit-appearance: none;
-  appearance: none;
-}
+    #newsletter-form input[type="email"]::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+    }
 
-/* Subscribe button */
-.newsletter button {
-  width: 100%;
-  height: 28px;
-  border: none;
-  border-radius: 6px;
-  background: #4b0082;
-  color: #fff;
-  font-weight: 600;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  margin-top: 4px;                  /* subtle downward shift for balance */
-}
+    #newsletter-form button[type="submit"] {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 0;
+      padding: 3px 0;
+      font-size: 0.625rem;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-family: inherit;
+      transition: color 0.2s, border-color 0.2s;
+    }
 
-.newsletter button:hover {
-  background: #5a00a0;
-}
+    #newsletter-form button[type="submit"]:hover {
+      color: rgba(255, 255, 255, 0.95);
+      border-color: rgba(255, 255, 255, 0.75);
+    }
 
-/* Optional message text */
-#form-msg {
-  margin-top: 6px;
-  font-size: 10px;
-  color: #222;
-  text-align: center;
-}
+    #form-msg {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+      min-height: 1em;
+    }
 
-/* Mobile layout fix (keeps mini size centered) */
-@media (max-width: 520px) {
-  .newsletter {
-    width: 150px;
-    padding: 10px 8px;
-  }
-}
+    .contact {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0;
+    }
 
+    /* Mobile */
+    @media (max-width: 600px) {
+      .inner {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .logo {
+        width: 160px;
+      }
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <!-- Artwork -->
-    <svg class="hero" viewBox="0 0 802 490" xmlns="http://www.w3.org/2000/svg" aria-label="Kill Gallery artwork">
-      <rect width="802" height="490" fill="#A17EE1"/>
-      <path d="M364.4 128.1L440.957 260.7H287.843L364.4 128.1Z" fill="#822E77"/>
-      <path d="M454.622 155L515.868 261.08H393.377L454.622 155Z" fill="#822E77"/>
-      <circle cx="454.902" cy="98" r="32" fill="#822E77"/>
-      <path d="M187.5 416.5H70.5L70 249.5L112.5 203.5L166 224L204.5 257.5L244 349L298 333L319 376.5L230 416.5H211L130 288L125 326L187.5 416.5Z" fill="#822E77"/>
-      <path d="M240 162.5L221 163.5C221 203.5 200 213 181 207L139 192.5C126 186.5 99 174.6 99 129C99 83.4 140.333 70.3333 161 69.5C225 69.5 237 148 240 162.5Z" fill="#822E77"/>
-      <path d="M337 368L314 326.5L344 301.5H399V318H361V332H399L359.5 360.5L337 368Z" fill="#822E77"/>
-      <path d="M614.5 416.5H731.5L732 249.5L689.5 203.5L636 224L597.5 257.5L558 349L504 333L483 376.5L572 416.5H591L672 288L677 326L614.5 416.5Z" fill="#822E77"/>
-      <path d="M562 162.5L581 163.5C581 203.5 602 213 621 207L663 192.5C676 186.5 703 174.6 703 129C703 83.4 661.667 70.3333 641 69.5C577 69.5 565 148 562 162.5Z" fill="#822E77"/>
-      <path d="M465 368L488 326.5L458 301.5H403V318H441V332H403L442.5 360.5L465 368Z" fill="#822E77"/>
-    </svg>
+    <div class="inner">
 
-    <!-- Small form -->
-    <section id="subscribe" class="newsletter">
-      <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
-        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
-        <input type="hidden" name="source" value="killgallery.com">
-        <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
-        <button type="submit">Subscribe</button>
-        <p id="form-msg" role="status"></p>
-      </form>
-    </section>
+      <!-- Logo -->
+      <div class="logo">
+        <svg viewBox="0 0 802 490" xmlns="http://www.w3.org/2000/svg" aria-label="Kill Gallery artwork">
+          <path d="M364.4 128.1L440.957 260.7H287.843L364.4 128.1Z" fill="#822E77"/>
+          <path d="M454.622 155L515.868 261.08H393.377L454.622 155Z" fill="#822E77"/>
+          <circle cx="454.902" cy="98" r="32" fill="#822E77"/>
+          <path d="M187.5 416.5H70.5L70 249.5L112.5 203.5L166 224L204.5 257.5L244 349L298 333L319 376.5L230 416.5H211L130 288L125 326L187.5 416.5Z" fill="#822E77"/>
+          <path d="M240 162.5L221 163.5C221 203.5 200 213 181 207L139 192.5C126 186.5 99 174.6 99 129C99 83.4 140.333 70.3333 161 69.5C225 69.5 237 148 240 162.5Z" fill="#822E77"/>
+          <path d="M337 368L314 326.5L344 301.5H399V318H361V332H399L359.5 360.5L337 368Z" fill="#822E77"/>
+          <path d="M614.5 416.5H731.5L732 249.5L689.5 203.5L636 224L597.5 257.5L558 349L504 333L483 376.5L572 416.5H591L672 288L677 326L614.5 416.5Z" fill="#822E77"/>
+          <path d="M562 162.5L581 163.5C581 203.5 602 213 621 207L663 192.5C676 186.5 703 174.6 703 129C703 83.4 661.667 70.3333 641 69.5C577 69.5 565 148 562 162.5Z" fill="#822E77"/>
+          <path d="M465 368L488 326.5L458 301.5H403V318H441V332H403L442.5 360.5L465 368Z" fill="#822E77"/>
+        </svg>
+      </div>
+
+      <!-- Centre: text + subscribe -->
+      <div class="centre">
+        <p class="tagline">A curatorial agency focused on bringing ambitious art to life in new worlds.</p>
+
+        <form id="newsletter-form" action="https://formbold.com/s/9xljk" method="POST">
+          <input type="email" name="email" placeholder="your email" required aria-label="Email">
+          <input type="hidden" name="source" value="killgallery.com">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none">
+          <button type="submit">Subscribe</button>
+          <p id="form-msg" role="status"></p>
+        </form>
+
+        <p class="contact">contact: killgallery@killgallery.com</p>
+      </div>
+
+    </div>
   </main>
 
   <script>
-    (function () {
-      const form = document.getElementById('newsletter-form');
-      const msg  = document.getElementById('form-msg');
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        msg.textContent = 'Submitting...';
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
-          });
-          msg.textContent = res.ok ? 'Thanks — speak soon.' : 'Sorry, something went wrong. Try again.';
-          if (res.ok) form.reset();
-        } catch {
-          msg.textContent = 'Network error. Please try again.';
+    const form = document.getElementById('newsletter-form');
+    const msg  = document.getElementById('form-msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data });
+        if (res.ok) {
+          msg.textContent = 'You\'re on the list.';
+          form.reset();
+        } else {
+          msg.textContent = 'Something went wrong — try again.';
         }
-      });
-    })();
+      } catch {
+        msg.textContent = 'Something went wrong — try again.';
+      }
+    });
   </script>
 </body>
 </html>
